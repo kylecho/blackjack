@@ -7,9 +7,17 @@ class window.Hand extends Backbone.Collection
     @add(@deck.pop())
     @last()
 
+  dealerHit: ->
+    console.log 'dealer hitting'
+    dealerScore = @scores()[0]
+    console.log dealerScore
+    @hit() while @scores()[0] < 17
+
+  stand: ->
+    @trigger 'changeTurn'
 
   hasAce: -> @reduce (memo, card) ->
-    memo or card.get('value') is 1
+    memo or card.get 'value' is 1
   , 0
 
   minScore: -> @reduce (score, card) ->
