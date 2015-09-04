@@ -2,15 +2,17 @@ class window.Hand extends Backbone.Collection
   model: Card
 
   initialize: (array, @deck, @isDealer) ->
+    @busted = false
 
   hit: ->
     @add(@deck.pop())
+    if @scores()[0] > 21
+      @busted = true
+      @trigger 'changeTurn'
     @last()
 
   dealerHit: ->
-    console.log 'dealer hitting'
-    dealerScore = @scores()[0]
-    console.log dealerScore
+    @first().flip()
     @hit() while @scores()[0] < 17
 
   stand: ->
