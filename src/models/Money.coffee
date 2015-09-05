@@ -30,6 +30,10 @@ class window.Money extends Backbone.Model
     @set 'currentBet', 0
 
   disableBet: ->
-    
+    @trigger 'disableBet'
 
   enableBet: ->
+    @trigger 'enableBet'
+
+  placeBet: ->
+    @trigger 'placeBet'

@@ -7,17 +7,18 @@ class window.Hand extends Backbone.Collection
     @isDealer = options.isDealer
 
   hit: ->
-    @add(@deck.pop())
+    @add(@deck.pop().flip())
     if @scores()[0] > 21
       @score = 0
       @trigger 'done'
     @last()
 
   dealerHit: ->
+    debugger
     @first().flip()
     # @hit() while @scores()[0] < 17
     while @scores()[0] < 17
-      @add(@deck.pop()) 
+      @add(@deck.pop().flip()) 
     @score = @scores()[0]
     if @score > 21
       @score = 0
@@ -41,4 +42,6 @@ class window.Hand extends Backbone.Collection
     # when there is an ace, it offers you two scores - the original score, and score + 10.
     [@minScore(), @minScore() + 10 * @hasAce()]
 
-
+  startGame: ->
+    if @isDealer then @at(1).flip()
+    else @each (card) -> card.flip()

@@ -3,14 +3,16 @@ class window.MoneyView extends Backbone.View
 
   initialize: ->
     @listenTo(@model, 'change', @render)
-    @listenTo(@model, 'disableBet', @disableBettingButton)
-    @listenTo(@model, 'enableBet', @enableBettingButton)
+    @listenTo(@model, 'disableBet', @disableButton)
+    @listenTo(@model, 'enableBet', @enableButton)
     @render()
 
-  template: _.template('<p>Cash: <%= cash %></p> \
-                        <p>Bet : <%= currentBet %></p> \
-                        <button class="increase-bet">+</button> \
-                        <button class="decrease-bet">-</button>')
+  template: _.template('<p>Cash: $<%= cash %></p> \
+                        <p>Bet : <%= currentBet %></p>')
+
+  buttons: $('<button class="increase-bet">+</button> \
+              <button class="decrease-bet">-</button> \
+              <button class="place-bet">Place bet</button>')
 
   events:
     'click .increase-bet': ->
@@ -19,13 +21,17 @@ class window.MoneyView extends Backbone.View
     'click .decrease-bet': ->
       @model.decreaseBet()
       @render()
+    'click .place-bet': ->
+      @model.placeBet()
+      @disableButton()
+      @render()
 
-  disableBettingButton: ->
+  disableButton: ->
     @$('button').attr('disabled', true)
 
-  enableBettingButton: ->
+  enableButton: ->
     @$('button').attr('disabled', false)
 
   render: ->
-    @$el.html(@template(@model.attributes))
+    @$el.html(@template(@model.attributes)).append(@buttons)
     @
