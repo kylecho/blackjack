@@ -23,11 +23,6 @@ class window.GameView extends Backbone.View
 
   showWinner: ->
     console.log 'showWinner invoked'
-    player = @model.get('playerHand')
-    dealer = @model.get('dealerHand')
-    switch
-      when player.score > dealer.score then winner = 'Player'
-      when player.score < dealer.score then winner = 'Dealer'
-      else winner = 'Push'
+    
     @$el.append(new EndView(model: @model).render().el)
 
