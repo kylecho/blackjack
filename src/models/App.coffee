@@ -2,8 +2,8 @@
 # of containing the game logic directly.
 class window.App extends Backbone.Model
   initialize: ->
-    @newGame()
     @set 'money', new Money()
+    @newGame()
 
   newGame: ->
     # debugger
@@ -15,3 +15,5 @@ class window.App extends Backbone.Model
         when player.score > dealer.score then @get('money').win()
         when player.score < dealer.score then @get('money').lose()
         else @get('money').push()
+    game.get('playerHand').on('add', => @get('money').disableBet())
+    @get('money').enableBet()

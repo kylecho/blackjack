@@ -23,9 +23,13 @@ class window.Money extends Backbone.Model
     @set 'currentBet', 0
 
   lose: ->
-    @set('cash', @get('cash') - (@get 'currentBet'))
     @set 'currentBet', 0
 
   push: ->
     @set('cash', @get('cash') + (@get 'currentBet'))
     @set 'currentBet', 0
+
+  disableBet: ->
+    
+
+  enableBet: ->

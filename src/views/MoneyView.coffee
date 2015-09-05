@@ -3,6 +3,8 @@ class window.MoneyView extends Backbone.View
 
   initialize: ->
     @listenTo(@model, 'change', @render)
+    @listenTo(@model, 'disableBet', @disableBettingButton)
+    @listenTo(@model, 'enableBet', @enableBettingButton)
     @render()
 
   template: _.template('<p>Cash: <%= cash %></p> \
@@ -18,6 +20,11 @@ class window.MoneyView extends Backbone.View
       @model.decreaseBet()
       @render()
 
+  disableBettingButton: ->
+    @$('button').attr('disabled', true)
+
+  enableBettingButton: ->
+    @$('button').attr('disabled', false)
 
   render: ->
     @$el.html(@template(@model.attributes))
