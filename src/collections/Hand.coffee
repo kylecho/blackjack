@@ -2,13 +2,13 @@ class window.Hand extends Backbone.Collection
   model: Card
 
   initialize: (array, @deck, @isDealer) ->
-    @busted = false
+    @score = @scores()[0]
 
   hit: ->
     @add(@deck.pop())
     if @scores()[0] > 21
-      @busted = true
-      @trigger 'changeTurn'
+      @score = 0
+      @trigger 'done'
     @last()
 
   dealerHit: ->
@@ -16,7 +16,8 @@ class window.Hand extends Backbone.Collection
     @hit() while @scores()[0] < 17
 
   stand: ->
-    @trigger 'changeTurn'
+    @score = @scores()[0]
+    @trigger 'done'
 
   hasAce: -> @reduce (memo, card) ->
     memo or card.get 'value' is 1

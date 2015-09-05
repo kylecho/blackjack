@@ -2,9 +2,7 @@
 # of containing the game logic directly.
 class window.App extends Backbone.Model
   initialize: ->
-    @set 'deck', deck = new Deck()
-    @set 'playerHand', deck.dealPlayer()
-    @set 'dealerHand', deck.dealDealer()
+    @newGame()
 
-    @get('playerHand').on('changeTurn', => @get('dealerHand').dealerHit())
-
+  newGame: ->
+    @set 'game', game = new Game()
