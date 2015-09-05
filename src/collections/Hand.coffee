@@ -14,6 +14,8 @@ class window.Hand extends Backbone.Collection
   dealerHit: ->
     @first().flip()
     @hit() while @scores()[0] < 17
+    @score = @scores()[0]
+    @trigger 'done'
 
   stand: ->
     @score = @scores()[0]
