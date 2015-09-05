@@ -12,3 +12,4 @@ class window.AppView extends Backbone.View
   render: ->
     @$el.children().detach()
     @$el.append new GameView(model: @model.get 'game').el
+    @$el.append new MoneyView(model: @model.get 'money').el

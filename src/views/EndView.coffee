@@ -11,8 +11,8 @@ class window.EndView extends Backbone.View
     player = @model.get('playerHand')
     dealer = @model.get('dealerHand')
     switch
-      when player.score > dealer.score then winner = 'Player'
-      when player.score < dealer.score then winner = 'Dealer'
+      when player.score > dealer.score then winner = 'Player wins!'
+      when player.score < dealer.score then winner = 'Dealer wins!'
       else winner = 'Push'
     @$el.html(@template(winner: winner))
     @
