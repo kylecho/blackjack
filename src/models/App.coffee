@@ -5,4 +5,5 @@ class window.App extends Backbone.Model
     @newGame()
 
   newGame: ->
-    @set 'game', game = new Game()
+    # debugger
+    @set 'game', new Game()

@@ -23,6 +23,6 @@ class window.GameView extends Backbone.View
 
   showWinner: ->
     console.log 'showWinner invoked'
-    
+    @$('.hit-button, .stand-button').attr('disabled', true);
     @$el.append(new EndView(model: @model).render().el)
 

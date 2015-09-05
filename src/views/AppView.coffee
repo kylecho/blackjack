@@ -3,9 +3,10 @@ class window.AppView extends Backbone.View
   className: 'app-view'
 
   events:
-    'click .new-game': => @model.newGame()
+    'click .new-game': (event) -> @model.newGame()
 
   initialize: ->
+    @model.on 'change', @render, @
     @render()
 
   render: ->
